@@ -36,6 +36,11 @@ class AddItemManualViewController: AppBaseViewController, UIPickerViewDataSource
         tableView.delegate = self
         tableView.dataSource = self
         
+        let screenSize = UIScreen.mainScreen().bounds
+        if let backgroundImage = UIImage(named: "Background-\(Int(screenSize.width))x\(Int(screenSize.height))") {
+            self.tableView.backgroundView = UIImageView(image: backgroundImage)
+        }
+        
         itemImage = nil
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddItemManualViewController.dismissKeyboard))
@@ -50,6 +55,10 @@ class AddItemManualViewController: AppBaseViewController, UIPickerViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

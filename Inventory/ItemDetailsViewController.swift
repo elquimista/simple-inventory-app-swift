@@ -27,6 +27,11 @@ class ItemDetailsViewController: AppBaseViewController, UITableViewDelegate, UIT
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(ItemDetailsViewController.didTapEdit))
         }
+        
+        let screenSize = UIScreen.mainScreen().bounds
+        if let backgroundImage = UIImage(named: "Background-\(Int(screenSize.width))x\(Int(screenSize.height))") {
+            self.tableView.backgroundView = UIImageView(image: backgroundImage)
+        }
     }
     
     func isModal() -> Bool {
@@ -48,6 +53,10 @@ class ItemDetailsViewController: AppBaseViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
